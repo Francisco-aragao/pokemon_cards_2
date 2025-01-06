@@ -1,0 +1,3 @@
+- Page to handle logout
+- Improve design
+- Reuse components
