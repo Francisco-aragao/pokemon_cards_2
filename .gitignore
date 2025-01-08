@@ -1,0 +1,4 @@
+node_modules
+back/pokemon_env
+__pycache__
+*.db
