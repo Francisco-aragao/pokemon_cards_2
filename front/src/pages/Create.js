@@ -18,8 +18,7 @@ function Create() {
 
             navigate('/dashboard', { state: { username, password } });
         } catch (error) {
-            console.error('Create failed:', error.message);
-            alert(error.message);
+            console.error('Create failed:' + error.message);
         }
     };
 

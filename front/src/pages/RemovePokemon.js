@@ -19,7 +19,7 @@ function RemovePokemon() {
             setPokemon({ name: pokemonName });
             setSuccessMessage(`Success! Pokémon "${pokemonName}" has been removed.`);
         } catch (error) {
-            console.error('Error fetching Pokémon data:', error);
+            console.error('Error fetching Pokémon data:' + error.message);
             setPokemon(null);
             setSuccessMessage('Failed to remove Pokémon. Please try again.');
         }

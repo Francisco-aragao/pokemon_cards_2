@@ -13,7 +13,7 @@ function Home() {
       const data = await fetchPokemon(pokemonName);
       setPokemon(data);
     } catch (error) {
-      console.error('Error fetching Pokémon data:', error);
+      console.error('Error fetching Pokémon data:' + error.message);
       setPokemon(null);
     }
   };

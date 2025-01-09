@@ -21,7 +21,7 @@ function AddPokemon() {
             setPokemon({ name: pokemonName });
             setSuccessMessage(`Success! Pokémon "${pokemonName}" has been added.`);
         } catch (error) {
-            console.error('Error fetching Pokémon data:', error);
+            console.error('Error fetching Pokémon data:' + error.message);
             setPokemon(null);
             setSuccessMessage('Failed to add Pokémon. Please try again.');
         }

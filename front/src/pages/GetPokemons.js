@@ -15,7 +15,7 @@ function GetPokemons() {
         const data = await getPokemons(username); 
         setPokemons(data);
       } catch (error) {
-        console.log('Error fetching Pokémon data:', error);
+        console.log('Error fetching Pokémon data:' + error.message);
       } 
     };
 

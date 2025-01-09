@@ -29,20 +29,22 @@ describe('Create User Page Tests', () => {
     cy.contains('Welcome, newUser').should('exist');
   });
 
-/*   it('should show an error with invalid credentials', () => {
+  it('should show an error with short password', () => {
+
       cy.get('input[type="text"]').type('invalidUser');
       cy.get('input[type="password"]').type('short');
 
       cy.intercept('POST', '/api/createUser', {
           statusCode: 400,
-          body: { message: 'ERRO' },
+          body: { message: 'Password too short"' },
       }).as('createUserFail');
 
       cy.get('form').submit();
 
       cy.wait('@createUserFail');
 
-      // Check for error message
-      cy.contains('ERRO').should('exist');
-  }); */
+      cy.on('window:alert', (alertText) => {
+        expect(alertText).to.contains('Error Create User: Password too short');
+      });
+  });
 });

@@ -19,8 +19,7 @@ function Login() {
       // Navigate to the dashboard with user details
       navigate('/dashboard', { state: { username, password } });
     } catch (error) {
-      console.error('Login failed:', error.message);
-      alert(error.message); 
+      console.error('Login failed:' + error.message);
     }
   };
 

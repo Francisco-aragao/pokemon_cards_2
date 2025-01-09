@@ -16,8 +16,8 @@ export const fetchPokemon = async (pokemonName) => {
     console.log('Data ', data)
     return data;
   } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
-    alert('Error fetching Pokémon data');
+    console.error('Error fetching Pokémon data:' + error.message);
+    alert('Error fetching Pokémon data' + error.message);
     throw error;
   }
 };
@@ -34,18 +34,23 @@ export const loginUser = async (username, password) => {
     });
 
     if (!response || !response.ok) {
-      throw new Error('Invalid username or password');
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
 
     if (data == false) {
-      throw new Error('Invalid username or password');
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
 
     return;
   } catch (error) {
-    console.error('Error during login:', error);
+    console.error('Error Login:' + error.message);
+    alert('Error Login:' + error.message);
     throw error;
   }
 };
@@ -61,20 +66,29 @@ export const createUser = async (username, password) => {
       body: JSON.stringify({ username, password }),
     });
 
+    console.log(response)
+
+    // get the response from the server
+
+    
     if (!response || !response.ok) {
-      throw new Error('Invalid username or password');
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
 
     if (data == false) {
-      throw new Error('Username or password already exists');
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
 
     return;
   } catch (error) {
-    console.error('Error: create user', error);
-    alert('Error fetching Pokémon data:', error);
+    console.error('Error Create User:' + error.message);
+    alert('Error Create User:' + error.message);
     throw error;
   }
 };
@@ -90,14 +104,17 @@ export const addPokemon = async (pokemonName, username) => {
       body: JSON.stringify({ username }),
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to add Pokémon.');
+    if (!response || !response.ok) {
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
+
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
-    alert('Error fetching Pokémon data:', error);
+    console.error('Error Add Pokémon:' + error.message);
+    alert('Error Remove Pokémon:' + error.message);
     throw error;
   }
 };
@@ -112,15 +129,17 @@ export const removePokemon = async (pokemonName, username) => {
       body: JSON.stringify({ username }),
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to add Pokémon.');
+    if (!response || !response.ok) {
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
-    alert('Error fetching Pokémon data:', error);
+    console.error('Error Remove Pokémon:' + error.message);
+    alert('Error Remove Pokémon:' + error.message);
     throw error;
   }
 };
@@ -134,15 +153,17 @@ export const getPokemons = async (username) => {
       },
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to fetch Pokémon.');
+    if (!response || !response.ok) {
+      const errorResponse = await response.json(); 
+      const errorMessage = errorResponse.detail; 
+      throw new Error(errorMessage);
     }
     
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
-    alert('Error fetching Pokémon data:', error);
+    console.error('Error Get Pokémons:' + error.message);
+    alert('Error Get Pokémons:' + error.message);
     throw error;
   }
 };

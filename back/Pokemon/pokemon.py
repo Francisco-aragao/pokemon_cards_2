@@ -260,9 +260,6 @@ async def add_pokemon(pokemon_name: str, user: dict) -> bool:
 
     user_id = db.getUserId(username)
 
-    print(username)
-    print(user_id)
-
     if user_id is None:
         raise HTTPException(status_code=401, detail="Invalid username")
     
