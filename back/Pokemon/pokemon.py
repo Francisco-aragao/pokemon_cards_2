@@ -175,6 +175,9 @@ db = DatabaseHandler("pokemon.db")
 
 def get_pokemon_data(pokemon_name: str) -> dict[str, str]:
     # Build the external API url
+
+    pokemon_name = pokemon_name.lower()
+
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
 
     try:
@@ -256,7 +259,7 @@ async def add_pokemon(pokemon_name: str, user: dict) -> bool:
 
     if user_id is None:
         raise HTTPException(status_code=401, detail="Invalid username")
-
+    
     # Check if pokemon exists on pokeapi
     try:
         get_pokemon_data(pokemon_name)
