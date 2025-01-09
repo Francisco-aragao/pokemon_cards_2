@@ -93,7 +93,6 @@ export const addPokemon = async (pokemonName, username) => {
     if (!response.ok) {
       throw new Error('Failed to add Pokémon.');
     }
-
     const data = await response.json();
     return data;
   } catch (error) {
