@@ -12,10 +12,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000/"],
+    allow_origins=["http://localhost:3000"],  # No trailing slash
     allow_credentials=True,
-    allow_methods=[""],
-    allow_headers=[""],
+    allow_methods=["*"],  # List all methods you intend to use
+    allow_headers=["*"],  # Allow all headers or specify required headers
 )
 
 ### DATABASE SETUP
@@ -239,6 +239,9 @@ async def create_user(user: dict) -> bool:
     if username == "" or password == "":
         raise HTTPException(status_code=400, detail="Empty fields")
 
+    if len(password) < 6:
+        raise HTTPException(status_code=400, detail="Password too short")
+
     # Check if user exists
     user_id = db.getUserId(username)
 
@@ -256,6 +259,9 @@ async def add_pokemon(pokemon_name: str, user: dict) -> bool:
     username = user.get("username", "")
 
     user_id = db.getUserId(username)
+
+    print(username)
+    print(user_id)
 
     if user_id is None:
         raise HTTPException(status_code=401, detail="Invalid username")
