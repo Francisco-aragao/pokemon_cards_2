@@ -50,9 +50,7 @@ jobs:
     - name: FRONTEND - Start the application
       run: |
         cd front
-        npm start 
-        if [ "$RUNNER_OS" = "Windows" ]; then timeout /T 60; else sleep 60; fi
-        # Wait for the server to start
+        npm start &
       env:
         CI: true  # Necessary to prevent Create React App from prompting during npm start
 
