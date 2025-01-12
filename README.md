@@ -55,10 +55,18 @@ The root contains .github/workflows, which contains the configuration file to us
 
 ### Tests
 
-Follow the same steps as the back (to run the tests, the back end must be running)
+Follow the same steps as the back (to run the unit tests, the back end must be running)
 
 After the back is running:
 
 ``` cd <path>/back/Pokemon/ ```
 
-``` python3 test_pokemon.py ```
+``` python3 pokemon_test.py ```
+
+To run the tests e2e:
+
+After the front is running:
+
+``` cd <path>/front ```
+
+``` npx cypress run ```
