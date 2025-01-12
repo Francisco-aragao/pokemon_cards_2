@@ -36,3 +36,31 @@ jobs:
       run: |
         cd back/Pokemon
         python pokemon_test.py
+
+    - name: FRONTEND - Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' 
+
+    - name: FRONTEND - Install dependencies
+      run: |
+        cd front
+        npm install
+
+    - name: FRONTEND - Start the application
+      run: |
+        cd front
+        npm start &
+      env:
+        CI: true  # Necessary to prevent Create React App from prompting during npm start
+
+    - name: FRONTEND - Wait for the app to be ready
+      run: |
+        npx wait-on http://localhost:3000  # Adjust the URL and port as necessary
+
+    - name: FRONTEND - Run Cypress tests
+      run: |
+        cd front
+        npx cypress run
+      env:
+        CYPRESS_baseUrl: http://localhost:3000  
