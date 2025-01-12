@@ -51,7 +51,7 @@ jobs:
       run: |
         cd front
         npm start &
-        sleep 30 # Wait for the server to start
+        sleep 60 # Wait for the server to start
       env:
         CI: true  # Necessary to prevent Create React App from prompting during npm start
 
