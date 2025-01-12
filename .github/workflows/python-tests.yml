@@ -52,16 +52,15 @@ jobs:
       run: |
         cd front
         if [ "$RUNNER_OS" = "Windows" ]; then 
-          Start-Process -FilePath "npm" -ArgumentList "start" -NoNewWindow -PassThru
+          start /B npm start
           timeout /T 60
         else 
           npm start & 
           sleep 60
         fi
-      shell: pwsh  # Ensure you are using PowerShell for Windows
+      shell: cmd  # Use cmd for Windows
       env:
-        CI: true  # Necessary to prevent Create React App from prompting during npm start
-    
+        CI: true  # Prevent Create React App from prompting during npm start
 
     - name: FRONTEND - Run Cypress tests
       run: |
