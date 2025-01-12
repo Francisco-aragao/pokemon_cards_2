@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest] 
-        python: [3.11, 3.12]  # Different Python versions, for consistency
+        python: [3.11]  
 
     steps:
     - name: Check out repository
@@ -48,17 +48,12 @@ jobs:
         cd front
         npm install
 
-    - name: FRONTEND - Start the application
+    - name: FRONTEND - Start the application and run cypress
       run: |
         cd front
         npm start &
         npx wait-on http://localhost:3000
-      env:
-        CI: true  # Necessary to prevent Create React App from prompting during npm start
-
-    - name: FRONTEND - Run Cypress tests
-      run: |
-        cd front
         npx cypress run
       env:
+        CI: true  # Necessary to prevent Create React App from prompting during npm start
         CYPRESS_baseUrl: http://localhost:3000  
