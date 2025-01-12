@@ -36,14 +36,14 @@ class TestGetPokemonFromPokeAPI(unittest.TestCase):
 class TestLogin(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        db.addUser("joao", "1234")
+        db.addUser("joao", "123456789")
 
     @classmethod
     def tearDownClass(self):
         db.removeUser("joao")
 
     def test_valid_login(self):
-        result = asyncio.run(login({"username": "joao", "password": "1234"}))
+        result = asyncio.run(login({"username": "joao", "password": "123456789"}))
 
         self.assertEqual(result, True)
 
@@ -64,25 +64,28 @@ class TestLogin(unittest.TestCase):
 class TestCreateUser(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        db.addUser("joao", "1234")
+        db.addUser("joao", "12345678")
 
     @classmethod
     def tearDownClass(self):
         db.removeUser("joao")
 
     def test_create_valid_user(self):
-        result = asyncio.run(create_user({"username": "ana", "password": "1234"}))
+        result = asyncio.run(create_user({"username": "ana", "password": "12345678"}))
 
         self.assertEqual(result, True)
 
     def test_user_already_exists(self):
         with self.assertRaises(HTTPException):
-            asyncio.run(create_user({"username": "joao", "password": "1234"}))
+            asyncio.run(create_user({"username": "joao", "password": "12345678"}))
 
     def test_blank_field(self):
         with self.assertRaises(HTTPException):
-            asyncio.run(create_user({"username": "", "password": "1234"}))
-
+            asyncio.run(create_user({"username": "", "password": "12345678"}))
+    
+    def test_error_short_password(self):
+        with self.assertRaises(HTTPException):
+            asyncio.run(create_user({"username": "ana", "password": "1234"}))
 
 """
 @app.get("/api/addPokemon/{pokemonName}")
@@ -92,7 +95,7 @@ class TestCreateUser(unittest.TestCase):
 class TestAddPokemon(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        db.addUser("joao", "1234")
+        db.addUser("joao", "12345678")
 
     @classmethod
     def tearDownClass(self):
@@ -126,7 +129,7 @@ class TestAddPokemon(unittest.TestCase):
 class TestRemovePokemon(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        db.addUser("joao", "1234")
+        db.addUser("joao", "12345678")
         id_user = db.getUserId("joao")
         id_user = id_user[0]
         db.addPokemon(id_user, "onix")
@@ -157,7 +160,7 @@ class TestRemovePokemon(unittest.TestCase):
 class TestGetPokemons(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        db.addUser("joao", "1234")
+        db.addUser("joao", "12345678")
         id_user = db.getUserId("joao")
         id_user = id_user[0]
         db.addPokemon(id_user, "pikachu")
