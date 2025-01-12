@@ -51,12 +51,9 @@ jobs:
       run: |
         cd front
         npm start &
+        sleep 30 # Wait for the server to start
       env:
         CI: true  # Necessary to prevent Create React App from prompting during npm start
-
-    - name: FRONTEND - Wait for the app to be ready
-      run: |
-        npx wait-on http://localhost:3000  # Adjust the URL and port as necessary
 
     - name: FRONTEND - Run Cypress tests
       run: |
