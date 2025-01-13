@@ -50,6 +50,9 @@ jobs:
 
     - name: FRONTEND - Start the application and run cypress
       run: |
+        cd back/Pokemon
+        uvicorn pokemon:app --reload
+        cd ../../
         cd front
         npm start &
         npx wait-on http://localhost:3000
