@@ -1,4 +1,4 @@
-describe('User Login Flow', () => {
+describe('Add Pokemon Navigation and Display', () => {
   it('should create a user and add a Pokémon', () => {
     cy.visit('/create');
     cy.contains('Create User').click();
